@@ -1,0 +1,32 @@
+
+main, footer {
+    font-family: 'Source Sans Pro', sans-serif;
+    color: whitesmoke;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.wrapper, .mx-auto {
+    margin-left: auto!important;
+    margin-right: auto!important;
+
+}
+
+
+body {
+    background-color: #333;
+}
+ main {
+     width:1436px;
+     height:600px;
+    background-image: url("mainbg.jpg");
+    background-size: cover;
+     background-repeat: no-repeat;
+     background-position: center;
+
+}
+
+
+
