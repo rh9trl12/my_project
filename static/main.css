@@ -1,5 +1,7 @@
 
-
+body {
+    min-width: 548px;
+}
 
 main, footer {
     font-family: 'Source Sans Pro', sans-serif;
@@ -8,16 +10,53 @@ main, footer {
 }
 
 .text-center {
-    text-align: center!important;
+    text-align: center !important;
     padding: 1.5rem;
 }
+.card{
+    display: block;
+}
+#accordion .card{
+    background-color: dimgray;
+}
+
+#accordion .card button{
+    color: black;
+}
+
+
+
+
+
+#mainBG img {
+
+    margin-top: 200px;
+    border-radius: 10%;
+    text-align: center;
+    width: 672px;
+    height: 500px;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+}
+
+.alert-primary {
+    font-size: 20px;
+}
+
+
+.main_text p{
+    font-size: 20px;
+}
+
+
 
 .wrapper {
 
     max-width: 42rem;
     display: inline-block;
-    margin-left: auto!important;
-    margin-right: auto!important;
+    margin-left: auto !important;
+    margin-right: auto !important;
 
 }
 
@@ -32,29 +71,43 @@ main, footer {
 }
 
 
+@media (max-width: 50rem) {
+    #mainBG {
+        display: block;
+        width: 500px;
+        height: 500px;
+        background-image: url("mainbg.jpg");
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+
+
+}
 
 
 @media (min-width: 50rem) {
-  .masthead-brand {
-      float: left;
-      text-align: center !important;
-  }
 
-  .nav-masthead  {
-      float: right;
-      margin-top: 85px;
-  }
+    .masthead-brand {
+        float: left;
+        text-align: center !important;
+    }
+
+    .nav-masthead {
+        float: right;
+        margin-top: 85px;
+    }
 
     .wrapper {
         min-width: 42rem;
-    display: inline-block;
-    margin-left: auto!important;
-    margin-right: auto!important;
+        display: inline-block;
+        margin-left: auto !important;
+        margin-right: auto !important;
 
-}
+    }
+
     .mt-auto {
-    margin-top: 200px!important;
-}
+        margin-top: 200px !important;
+    }
 
 }
 
@@ -66,8 +119,8 @@ p {
     margin-inline-end: 0px;
 }
 
-    .mt-auto {
-    margin-top: 200px!important;
+.mt-auto {
+    margin-top: 200px !important;
 }
 
 body {

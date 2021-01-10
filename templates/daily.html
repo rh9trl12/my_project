@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../static/daily.css">
+    <title>management yourself</title>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $("#reviews-box").html("");
+
+
+            showReview();   //온전히 html이 실핸된다음에 스크립트를 실행하는 코드이다!
+        });
+
+        function makeReview() {
+            // 1. 제목, 저자, 리뷰 내용을 가져옵니다.
+            // 2. 제목, 저자, 리뷰 중 하나라도 입력하지 않았을 경우 alert를 띄웁니다.
+            // 3. POST /review 에 저장을 요청합니다.
+
+            let day = $("#day").val();
+            let routine = $("#routine").val();
+            let comment = $("#comment").val();
+
+            if (day == "") {
+                alert("날짜를 입력해주세요!");
+                $('#day').focus();
+                return;
+            } else if (routine == "") {
+                alert("루틴을 입력해주세요!");
+                $('#routine').focus();
+                return;
+            } else if (comment == "") {
+                alert("내용을 입력해주세요!");
+                $('#comment').focus();
+                return;
+            }
+
+
+            $.ajax({
+                type: "POST",
+                url: "/own",
+                data: {
+                    day_by_client: day,
+                    routine_by_client: routine,
+                    comment_by_client: comment
+                },
+                success: function (response) {
+                    if (response["result"] == "success") {
+                        alert(response["msg"]);
+                        window.location.reload(); //자바스크립트가 자동으로 리로드 해주는 것!
+                    }
+                }
+            })
+        }
+
+        function showReview() {
+
+            $.ajax({
+                type: "GET",
+                url: "/own",
+                data: {},
+                success: function (response) {
+                    if (response["result"] == "success") {
+
+                        let own = response['own'];
+
+                        for (let i = 0; i < own.length; i++) {
+
+                            let tempHtml = `<tr>
+                                              <td>${own[i]['day']}</td>
+                                              <td>${own[i]['routine']}</td>
+                                              <td>${own[i]['comment']}</td>
+                                             </tr>`
+
+                            $('#reviews-box').append(tempHtml)
+                        }
+
+                    } else {
+                        alert("리뷰를 받아오지 못했습니다");
+                    }
+                }
+            })
+        }
+
+        function validateLength(obj) {
+            let content = $(obj).val();
+            if (content.length > 140) {
+                alert("리뷰는 140자까지 기록할 수 있습니다.");
+                $(obj).val(content.substring(0, content.length - 1));
+            }
+        }
+    </script>
+</head>
+
+
+<body class="text-center">
+<div class="wrapper mx-auto">
+
+
+    <header class="masthead ms-auto">
+        <div class="inner">
+            <a href="main.html"><h3 class="masthead-brand"><img src="../static/logo.jpg"></h3></a>
+            <nav class="nav nav-masthead justify-content-center">
+                <a class="nav-link active" href="posture.html">posture</a>
+                <a class="nav-link" href="body%20check.html">body check</a>
+                <a class="nav-link" href="daily.html">daily</a>
+            </nav>
+        </div>
+    </header>
+
+
+    <main>
+        <div class="info">
+
+            <h2>sports diary</h2><br>
+
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>기록은 또 하나의 힘!</strong> 여러분들의 운동 날짜와 루틴, 간단한 내용을 적어주세요!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">day</span>
+                </div>
+                <input type="text" class="form-control" id="day">
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">routine</span>
+                </div>
+                <input type="text" class="form-control" id="routine">
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">comment</span>
+                </div>
+            <textarea class="form-control" id="comment"
+                      cols="30"
+                      rows="5" placeholder="140자까지 입력할 수 있습니다." onkeyup="validateLength(this)"></textarea>
+            </div>
+            <div class="review">
+                <button onclick="makeReview()" type="button" class="btn btn-secondary">일지 작성하기</button>
+            </div>
+        </div>
+
+        <div class="review">
+        <table class="table table-bordered table-dark">
+            <thead>
+            <tr>
+                <th scope="col">day</th>
+                <th scope="col">routine</th>
+                <th scope="col">comment</th>
+            </tr>
+            </thead>
+
+            <tbody id="#review-box">
+            <tr>
+                <td>2020/01/22</td>
+                <td>가슴,어깨</td>
+                <td>Larry</td>
+            </tr>
+            </tbody>
+        </table>
+        </div>
+
+    </main>
+
+    <footer class="mastfoot mt-auto">
+        contact: rh9trl12@naver.com
+
+
+    </footer>
+
+
+</div>
+</body>

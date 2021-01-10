@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../static/main.css">
     <script src="../static/sheet.js"></script>
     <title>management yourself</title>
+    <link rel="stylesheet" href="../../../templated-simplified/sql.css">
 
 </head>
 
@@ -28,25 +29,65 @@
 
     <header class="masthead ms-auto">
         <div class="inner">
-            <h3 class="masthead-brand"><img src="../static/logo.jpg"> </h3>
+            <a href="main.html"><h3 class="masthead-brand"><img src="../static/logo.jpg"></h3></a>
             <nav class="nav nav-masthead justify-content-center">
-                <a class="nav-link active" href="#">Home</a>
-                <a class="nav-link" href="#">body type</a>
-                <a class="nav-link" href="#">daily</a>
+                <a class="nav-link active" href="posture.html">posture</a>
+                <a class="nav-link" href="body%20check.html">body check</a>
+                <a class="nav-link" href="daily.html">daily</a>
             </nav>
         </div>
     </header>
 
 
     <main>
+        <div id="accordion">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne"
+                                aria-expanded="true" aria-controls="collapseOne">
+                            posture
+                        </button>
+                    </h5>
+                </div>
 
-
-        <p>
-             management yourself<br>
-            1) 원하는 부위의 운동방법을 영상을 통해 배울 수 있습니다.<br>
-            2) 자신의 체형을 확인해볼 수 있습니다.<br>
-            3) 운동일지를 기록해나갈 수 있습니다.<br>
-        </p>
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="card-body">
+                        원하는 부위의 운동자세를 영상을 통해 배울 수 있습니다
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingTwo">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo"
+                                aria-expanded="false" aria-controls="collapseTwo">
+                            body check
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                    <div class="card-body">
+                        자신의 체형을 확인해볼 수 있습니다.
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingThree">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree"
+                                aria-expanded="false" aria-controls="collapseThree">
+                            daily
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                    <div class="card-body">
+                        운동일지를 기록해 나갈 수 있습니다.
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </main>
 
